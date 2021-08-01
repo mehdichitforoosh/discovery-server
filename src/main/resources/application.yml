@@ -1,0 +1,24 @@
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    region: region1
+    serviceUrl:
+      zone1: http://discovery-server-01:8761/eureka/
+    availability-zones:
+      region1: zone1
+# Multi profile for creating multiple eureka service discovery server from one source
+---
+spring:
+  profiles: discovery-server-01
+eureka:
+  instance:
+    hostname: discovery-server-01
+    metadata-map:
+      zone: zone1
+
+logging:
+  level:
+    root: ERROR
